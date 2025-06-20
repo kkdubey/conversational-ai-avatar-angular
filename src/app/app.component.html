@@ -1,0 +1,11 @@
+<div class="app-container">
+  <app-configuration 
+    *ngIf="!showSession"
+    (sessionStart)="onSessionStart()">
+  </app-configuration>
+  
+  <app-session 
+    *ngIf="showSession"
+    (backToConfiguration)="onBackToConfiguration()">
+  </app-session>
+</div>

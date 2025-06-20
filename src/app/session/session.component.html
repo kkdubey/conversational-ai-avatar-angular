@@ -1,0 +1,138 @@
+<div class="session-container">
+  <div class="session-header">
+    <h1>AI TUTOR - Session</h1>
+    <div class="session-status">
+      <span [class]="getSessionStatusClass()">{{ getSessionStatusText() }}</span>
+    </div>
+  </div>
+
+  <div class="main-session-area">
+    <!-- Control Panel -->
+    <div class="control-panel">
+      <div class="control-buttons">
+        <button 
+          [class]="'btn ' + getMicrophoneButtonClass()" 
+          (click)="toggleMicrophone()" 
+          [disabled]="!sessionActive">
+          <i class="icon-mic"></i>
+          {{ getMicrophoneButtonText() }}
+        </button>
+
+        <button 
+          class="btn btn-warning" 
+          (click)="stopSpeaking()" 
+          [disabled]="!isSpeaking">
+          <i class="icon-stop"></i>
+          Stop Speaking
+        </button>
+
+        <button 
+          class="btn btn-info" 
+          (click)="clearChatHistory()">
+          <i class="icon-clear"></i>
+          Clear Chat
+        </button>        <button 
+          class="btn btn-secondary" 
+          (click)="stopSession()">
+          <i class="icon-close"></i>
+          Close Session
+        </button>
+
+        <button 
+          class="btn btn-info" 
+          (click)="debugSession()">
+          🐛 Debug
+        </button>
+      </div>
+
+      <!-- Toggle Options -->
+      <div class="toggle-options">
+        <div class="toggle-group">
+          <input type="checkbox" id="showChatHistory" [(ngModel)]="showChatHistory">
+          <label for="showChatHistory">Show Chat History</label>
+        </div>
+
+        <div class="toggle-group">
+          <input type="checkbox" id="showSubtitles" [(ngModel)]="showSubtitles">
+          <label for="showSubtitles">Show Subtitles</label>
+        </div>
+
+        <div class="toggle-group">
+          <input type="checkbox" id="showTypeMessage" [(ngModel)]="showTypeMessage" (change)="toggleTypeMessage()">
+          <label for="showTypeMessage">Type Message</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Video and Chat Area -->
+    <div class="video-chat-area">
+      <!-- Avatar Video Container -->
+      <div class="video-container">        <video 
+          #remoteVideo 
+          id="remoteVideo"
+          class="avatar-video"
+          autoplay
+          playsinline
+          [muted]="false"
+          (click)="onVideoClick()">
+        </video>
+
+        <!-- Loading overlay -->
+        <div class="loading-overlay" *ngIf="!sessionActive">
+          <div class="loading-spinner"></div>
+          <p>Connecting to Avatar...</p>
+        </div>
+
+        <!-- Chat History Overlay -->
+        <div 
+          class="chat-history-overlay" 
+          *ngIf="showChatHistory && chatHistory"
+          #chatHistoryContainer>
+          <div class="chat-history-content">
+            <h4>Chat History</h4>
+            <div class="chat-messages">
+              <pre>{{ chatHistory }}</pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subtitles Overlay -->
+        <div 
+          class="subtitles-overlay" 
+          *ngIf="showSubtitles && subtitles">
+          <span class="subtitle-text">{{ subtitles }}</span>
+        </div>
+
+        <!-- Status Indicators -->
+        <div class="status-indicators">
+          <div class="status-indicator microphone" [class.active]="microphoneActive">
+            <i class="icon-mic"></i>
+          </div>
+          <div class="status-indicator speaking" [class.active]="isSpeaking">
+            <i class="icon-volume"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Type Message Area -->
+  <div class="type-message-area" *ngIf="showTypeMessage">
+    <div class="message-input-container">
+      <div class="message-input-wrapper">
+        <input 
+          #userMessageInput
+          type="text"
+          class="message-input" 
+          [(ngModel)]="userMessage"
+          (keydown)="onUserMessageKeyDown($event)"
+          placeholder="Type your message here...">
+        <button 
+          class="btn btn-primary send-button" 
+          (click)="sendTypedMessage()"
+          [disabled]="!userMessage || !userMessage.trim()">
+          Send
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

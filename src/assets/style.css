@@ -1,0 +1,382 @@
+/*
+ * Modern Azure AI Avatar Interface Styles
+ */
+* {
+  box-sizing: border-box;
+}
+
+.hidden {
+  display: none;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  word-break: break-word;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #333;
+}
+
+/* Main container for the entire page */
+.main-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Header styling */
+#pageTitle {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(45deg, #3498db, #8e44ad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Configuration panel styling */
+#configuration {
+  background: #f8f9fa;
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+  border: 1px solid #e9ecef;
+}
+
+#configuration h2 {
+  color: #2c3e50;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #3498db;
+}
+
+#configuration h3 {
+  color: #34495e;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Form controls styling */
+label {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #2c3e50;
+  min-width: 120px;
+}
+
+input[type="text"], 
+input[type="password"], 
+select, 
+textarea {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 0.75rem;
+  border: 2px solid #e9ecef;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  background: white;
+  margin-bottom: 1rem;
+}
+
+input[type="text"]:focus, 
+input[type="password"]:focus, 
+select:focus, 
+textarea:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  transform: translateY(-1px);
+}
+
+textarea {
+  width: 100%;
+  max-width: 800px;
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* Checkbox styling */
+input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #3498db;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  position: relative;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+input[type="checkbox"]:checked {
+  background: #3498db;
+  border-color: #3498db;
+}
+
+input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  color: white;
+  font-size: 14px;
+  top: -2px;
+  left: 2px;
+}
+
+/* Button styling */
+button {
+  background: linear-gradient(45deg, #3498db, #2980b9);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 2px solid transparent;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(45deg, #2980b9, #1abc9c);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button[disabled] {
+  background: #95a5a6;
+  color: #ecf0f1;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+button[disabled]:hover {
+  background: #95a5a6;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Special button styling */
+#openSessionButton {
+  background: linear-gradient(45deg, #e74c3c, #c0392b);
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+  font-weight: 600;
+}
+
+#openSessionButton:hover {
+  background: linear-gradient(45deg, #c0392b, #a93226);
+}
+
+#testMicButton {
+  background: linear-gradient(45deg, #f39c12, #e67e22);
+}
+
+#testMicButton:hover {
+  background: linear-gradient(45deg, #e67e22, #d35400);
+}
+
+#testAudioButton {
+  background: linear-gradient(45deg, #27ae60, #229954);
+}
+
+#testAudioButton:hover {
+  background: linear-gradient(45deg, #229954, #1e8449);
+}
+
+/* Layout for main container */
+#mainContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-top: 2rem;
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+
+/* Control buttons panel */
+#buttonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 200px;
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+}
+
+#buttonContainer button {
+  background: linear-gradient(45deg, #6c5ce7, #5f3dc4);
+  margin: 0;
+  width: 100%;
+  font-weight: 500;
+}
+
+#buttonContainer button:hover {
+  background: linear-gradient(45deg, #5f3dc4, #4c63d2);
+}
+
+#buttonContainer button:disabled {
+  background: #bdc3c7;
+}
+
+/* Avatar container */
+#videoContainer {
+  position: relative;
+  flex: 1;
+  max-width: 960px;
+  background: #000;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Video styling */
+video {
+  width: 100%;
+  height: auto;
+  background: #000;
+  border-radius: 15px;
+}
+
+/* Chat history overlay */
+#chatHistory {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  width: 350px;
+  max-height: 400px;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 1rem;
+  overflow-y: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+/* Subtitles overlay */
+#subtitles {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Type message section */
+#showTypeMessageCheckbox {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+}
+
+#userMessageBox {
+  width: 100%;
+  min-height: 120px;
+  max-height: 200px;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  padding: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.9rem;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+#userMessageBox:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+/* Upload icon styling */
+#uploadImgIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 8px;
+  background: #3498db;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+#uploadImgIcon:hover {
+  background: #2980b9;
+  transform: scale(1.1);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .main-wrapper {
+    margin: 1rem;
+    padding: 1rem;
+  }
+  
+  #pageTitle {
+    font-size: 2rem;
+  }
+  
+  #mainContainer {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  #videoContainer {
+    width: 100%;
+  }
+  
+  #chatHistory {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  textarea {
+    width: 100%;
+  }
+}
+  

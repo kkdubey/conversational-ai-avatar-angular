@@ -1,0 +1,236 @@
+<!-- Compact Bootstrap Configuration Layout -->
+<div class="container-fluid py-2">
+  <div class="row justify-content-center">
+    <div class="col-12 col-xxl-11">
+      
+      <!-- Compact Header -->
+      <div class="text-center mb-3">
+        <h1 class="h3 fw-bold text-primary mb-1">AI TUTOR Configuration</h1>
+      </div>
+
+      <!-- Configuration Form -->
+      <form [formGroup]="configForm" (ngSubmit)="onSubmit()" class="bg-white rounded-3 shadow-sm p-3">
+        
+        <!-- Three Column Layout for Compact Design -->
+        <div class="row g-3">
+          
+          <!-- Left Column -->
+          <div class="col-lg-4">
+            
+            <!-- Azure Speech Resource -->
+            <div class="card border-0 shadow-sm mb-3">
+              <div class="card-header bg-primary text-white py-2">
+                <h6 class="mb-0 fw-semibold">🎤 Azure Speech</h6>
+              </div>
+              <div class="card-body p-2">
+                <div class="mb-2">
+                  <label for="region" class="form-label small">Region</label>
+                  <select id="region" formControlName="region" class="form-select form-select-sm">
+                    <option value="westus2">West US 2</option>
+                    <option value="westeurope">West Europe</option>
+                    <option value="southeastasia">Southeast Asia</option>
+                    <option value="southcentralus">South Central US</option>
+                    <option value="northeurope">North Europe</option>
+                    <option value="swedencentral">Sweden Central</option>
+                    <option value="eastus2">East US 2</option>
+                  </select>
+                </div>
+                <div class="mb-2">
+                  <label for="apiKey" class="form-label small">API Key</label>
+                  <input id="apiKey" type="password" formControlName="apiKey" class="form-control form-control-sm" 
+                         placeholder="Enter API Key">
+                  <div *ngIf="configForm.get('apiKey')?.invalid && configForm.get('apiKey')?.touched" 
+                       class="text-danger small">Required</div>
+                </div>
+                
+                <div class="form-check">
+                  <input type="checkbox" id="enablePrivateEndpoint" formControlName="enablePrivateEndpoint" 
+                         class="form-check-input">
+                  <label for="enablePrivateEndpoint" class="form-check-label small">Private Endpoint</label>
+                </div>
+                
+                <div *ngIf="configForm.get('enablePrivateEndpoint')?.value" class="mt-2">
+                  <input id="privateEndpoint" type="text" formControlName="privateEndpoint" 
+                         class="form-control form-control-sm" placeholder="https://{your}.cognitiveservices.azure.com/">
+                </div>
+              </div>
+            </div>
+
+            <!-- STT/TTS Configuration -->
+            <div class="card border-0 shadow-sm">
+              <div class="card-header bg-success text-white py-2">
+                <h6 class="mb-0 fw-semibold">🗣️ Speech Config</h6>
+              </div>
+              <div class="card-body p-2">
+                <div class="mb-2">
+                  <label for="sttLocales" class="form-label small">STT Locales</label>
+                  <input id="sttLocales" type="text" formControlName="sttLocales" class="form-control form-control-sm" 
+                         placeholder="en-US,de-DE,es-ES">
+                </div>
+                <div class="mb-2">
+                  <label for="ttsVoice" class="form-label small">TTS Voice</label>
+                  <input id="ttsVoice" type="text" formControlName="ttsVoice" class="form-control form-control-sm" 
+                         placeholder="en-US-AvaMultilingualNeural">
+                </div>
+                
+                <div class="row g-1">
+                  <div class="col-6">
+                    <div class="form-check">
+                      <input type="checkbox" id="continuousConversation" formControlName="continuousConversation" 
+                             class="form-check-input">
+                      <label for="continuousConversation" class="form-check-label small">Continuous</label>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-check">
+                      <input type="checkbox" id="autoStartMicrophone" formControlName="autoStartMicrophone" 
+                             class="form-check-input">
+                      <label for="autoStartMicrophone" class="form-check-label small">Auto-start Mic</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Middle Column -->
+          <div class="col-lg-5">
+            
+            <!-- Azure OpenAI Resource -->
+            <div class="card border-0 shadow-sm mb-3">
+              <div class="card-header bg-info text-white py-2">
+                <h6 class="mb-0 fw-semibold">🤖 Azure OpenAI</h6>
+              </div>
+              <div class="card-body p-2">
+                <div class="mb-2">
+                  <label for="azureOpenAIEndpoint" class="form-label small">Endpoint</label>
+                  <input id="azureOpenAIEndpoint" type="text" formControlName="azureOpenAIEndpoint" 
+                         class="form-control form-control-sm" placeholder="https://your-resource.openai.azure.com">
+                  <div *ngIf="configForm.get('azureOpenAIEndpoint')?.invalid && configForm.get('azureOpenAIEndpoint')?.touched" 
+                       class="text-danger small">Required</div>
+                </div>
+                
+                <div class="row g-2">
+                  <div class="col-6">
+                    <label for="azureOpenAIApiKey" class="form-label small">API Key</label>
+                    <input id="azureOpenAIApiKey" type="password" formControlName="azureOpenAIApiKey" 
+                           class="form-control form-control-sm" placeholder="Enter API Key">
+                    <div *ngIf="configForm.get('azureOpenAIApiKey')?.invalid && configForm.get('azureOpenAIApiKey')?.touched" 
+                         class="text-danger small">Required</div>
+                  </div>
+                  <div class="col-6">
+                    <label for="azureOpenAIDeploymentName" class="form-label small">Deployment</label>
+                    <input id="azureOpenAIDeploymentName" type="text" formControlName="azureOpenAIDeploymentName" 
+                           class="form-control form-control-sm" placeholder="gpt-4o">
+                    <div *ngIf="configForm.get('azureOpenAIDeploymentName')?.invalid && configForm.get('azureOpenAIDeploymentName')?.touched" 
+                         class="text-danger small">Required</div>
+                  </div>
+                </div>
+                
+                <div class="mt-2">
+                  <label for="systemPrompt" class="form-label small">System Prompt</label>
+                  <textarea id="systemPrompt" formControlName="systemPrompt" class="form-control form-control-sm" 
+                            rows="2" placeholder="You are an AI assistant..."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cognitive Search Section (Collapsible) -->
+            <div class="card border-0 shadow-sm">
+              <div class="card-header bg-secondary text-white py-2">
+                <div class="form-check mb-0">
+                  <input type="checkbox" id="enableOyd" formControlName="enableOyd" class="form-check-input">
+                  <label for="enableOyd" class="form-check-label fw-semibold">📊 On Your Data</label>
+                </div>
+              </div>
+              
+              <div *ngIf="configForm.get('enableOyd')?.value" class="card-body p-2">
+                <div class="mb-2">
+                  <label for="azureCogSearchEndpoint" class="form-label small">Search Endpoint</label>
+                  <input id="azureCogSearchEndpoint" type="text" formControlName="azureCogSearchEndpoint" 
+                         class="form-control form-control-sm" placeholder="https://your-search.search.windows.net">
+                </div>
+                <div class="row g-2">
+                  <div class="col-6">
+                    <label for="azureCogSearchApiKey" class="form-label small">API Key</label>
+                    <input id="azureCogSearchApiKey" type="password" formControlName="azureCogSearchApiKey" 
+                           class="form-control form-control-sm" placeholder="Enter API Key">
+                  </div>
+                  <div class="col-6">
+                    <label for="azureCogSearchIndexName" class="form-label small">Index Name</label>
+                    <input id="azureCogSearchIndexName" type="text" formControlName="azureCogSearchIndexName" 
+                           class="form-control form-control-sm" placeholder="your-index">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="col-lg-3">
+            
+            <!-- Avatar Configuration -->
+            <div class="card border-0 shadow-sm mb-3">
+              <div class="card-header bg-warning text-dark py-2">
+                <h6 class="mb-0 fw-semibold">👤 Avatar</h6>
+              </div>
+              <div class="card-body p-2">
+                <div class="mb-2">
+                  <label for="talkingAvatarCharacter" class="form-label small">Character</label>
+                  <input id="talkingAvatarCharacter" type="text" formControlName="talkingAvatarCharacter" 
+                         class="form-control form-control-sm" placeholder="meg">
+                </div>
+                <div class="mb-2">
+                  <label for="talkingAvatarStyle" class="form-label small">Style</label>
+                  <input id="talkingAvatarStyle" type="text" formControlName="talkingAvatarStyle" 
+                         class="form-control form-control-sm" placeholder="formal">
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card border-0 shadow-sm">
+              <div class="card-header bg-dark text-white py-2">
+                <h6 class="mb-0 fw-semibold">⚡ Actions</h6>
+              </div>
+              <div class="card-body p-2">
+                <div class="d-grid gap-2">
+                  <button type="submit" class="btn btn-primary btn-sm" [disabled]="!configForm.valid">
+                    🚀 Start Session
+                  </button>
+                  
+                  <button type="button" class="btn btn-info btn-sm" (click)="runDiagnostics()">
+                    🔍 Diagnostics
+                  </button>
+                  
+                  <div class="row g-1">
+                    <div class="col-6">
+                      <button type="button" class="btn btn-secondary btn-sm w-100" (click)="testMicrophone()" [disabled]="testingMicrophone">
+                        {{ testingMicrophone ? '...' : '🎤' }}
+                      </button>
+                    </div>
+                    <div class="col-6">
+                      <button type="button" class="btn btn-secondary btn-sm w-100" (click)="testAudioLevels()" [disabled]="testingAudio">
+                        {{ testingAudio ? '...' : '🔊' }}
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <button type="button" class="btn btn-outline-secondary btn-sm" (click)="resetToDefaults()">
+                    🔄 Reset
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Test Results -->
+        <div *ngIf="testResults" class="alert alert-info mt-3 py-2">
+          <h6 class="alert-heading small">Test Results:</h6>
+          <pre class="mb-0 small">{{ testResults }}</pre>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
