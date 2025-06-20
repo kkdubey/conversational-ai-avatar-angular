@@ -38,7 +38,7 @@ The application consists of two main components:
 
 1. **Clone the repository**:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/kkdubey/conversational-ai-avatar-angular.git
    cd conversational-ai-avatar-angular
    ```
 
