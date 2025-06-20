@@ -39,7 +39,7 @@ The application consists of two main components:
 1. **Clone the repository**:
    ```bash
    git clone <repository-url>
-   cd Azure-Ai-Avatar/AngularSample/azure-ai-avatar
+   cd conversational-ai-avatar-angular
    ```
 
 2. **Install dependencies**:
